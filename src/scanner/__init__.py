@@ -1,1 +1,1 @@
-from .scanner import event_generator
+from .scanner import checkpoint_event_generator
