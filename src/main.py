@@ -1,7 +1,7 @@
+import logging
 import pendulum
 
 import scanner
-import logging
 
 
 def main():
@@ -10,13 +10,13 @@ def main():
     start_time = pendulum.now()
     logging.info("--Started--")
 
-    eg = scanner.checkpoint_event_generator()
+    event_generator = scanner.checkpoint_event_generator()
 
-    for event_data in eg:
+    for event_data in event_generator:
         logging.info(event_data)
 
     end_time = pendulum.now()
-    logging.info(f"Took {(end_time - start_time).as_interval()}")
+    logging.info("Took %s", (end_time - start_time).as_interval())
 
 
 if __name__ == '__main__':
