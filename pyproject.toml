@@ -8,6 +8,7 @@ authors = ["Sagi Sarussi <sagis@sagis.dev>"]
 python = "^3.9"
 requests = "^2.25.1"
 pendulum = "^2.1.2"
+pymongo = "^3.11.3"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.7.4"
