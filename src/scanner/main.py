@@ -1,7 +1,7 @@
 import logging
 import pendulum
 
-import scanner
+from scanner import checkpoint_event_generator
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
     start_time = pendulum.now()
     logging.info("--Started--")
 
-    event_generator = scanner.checkpoint_event_generator()
+    event_generator = checkpoint_event_generator()
 
     for event_data in event_generator:
         logging.info(event_data)

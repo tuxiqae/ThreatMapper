@@ -1,7 +1,7 @@
 import json
 import requests
 
-from .event import attack_decoder
+from event import attack_decoder
 
 URL = r"https://threatmap-api.checkpoint.com/ThreatMap/api/feed"
 
