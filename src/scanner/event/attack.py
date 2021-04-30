@@ -1,10 +1,12 @@
 from typing import Dict
-
 import pendulum
+from tzwhere import tzwhere
 
 from .location import Location
 
 from database import attack_coll
+
+tzwhere = tzwhere.tzwhere()
 
 
 class Attack:
@@ -32,17 +34,19 @@ def attack_decoder(event: Dict):
                    'a_t': 'attack_type',
                    's_co': 'src_country',
                    's_s': 'src_state',
-                   's_lo': 'src_lon',
                    's_la': 'src_lat',
+                   's_lo': 'src_lon',
                    'd_co': 'dst_country',
                    'd_s': 'dst_state',
-                   'd_lo': 'dst_lon',
                    'd_la': 'dst_lat',
+                   'd_lo': 'dst_lon',
                    't': 'time'
                    }
     event = dict((rename_dict[key], value) for (key, value) in event.items())
 
     event["time"] = pendulum.now()
+    event["src_time"] = event["time"].set(tz=tzwhere.tzNameAt(event['src_lat'], event['src_lon']))
+    event["dst_time"] = event["time"].set(tz=tzwhere.tzNameAt(event['dst_lat'], event['dst_lon']))
 
     attack_coll.insert_one(event)
     # {'a_c': 4, 'a_n': 'Content Protection Violation', 'a_t': 'exploit', 'd_co': 'BE', 'd_la': 50.8336,
